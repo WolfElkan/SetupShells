@@ -1,12 +1,12 @@
 echo "Please enter your name:"
-read author
-# author="test"
-# echo $author
+# read author
+author="test"
+echo $author
 
 echo "Please enter your email:"
-read email
-# email="test@example.com"
-# echo $email
+# read email
+email="test@example.com"
+echo $email
 
 echo "Please enter a name for the project:"
 read project
@@ -49,7 +49,7 @@ cd $project
 			cd factories
 
 				touch "$Entity"Factory.js
-				echo "app.factory('"$Entity"Factory',['\$http','\$q',function(\$http,\$q) {\n\n\tvar factory = {}\n\tvar content = []\n\n\tfunction valid("$entity") {\n\t\treturn true\n\t}\n\n\tfactory.all = function() {\n\t\t\$http.get('/"$plural"').then(function(returned) {\n\t\t\tconsole.log(returned)\n\t\t\treturn returned.data."$plural"\n\t\t})\n\t}\n\n\tfactory.get = function(callback) {\n\t\tif (typeof(callback) == 'function') {\n\t\t\treturn callback(content)\n\t\t} else {\n\t\t\tthrow new TypeError('Expected Function, got',callback.__proto__.constructor.name)\n\t\t}\n\t}\n\n\tfactory.findex = function(id,key='_id') {\n\t\tfor (var i = 0; i < content.length; i++) {\n\t\t\tif (content[i][key] == id) {\n\t\t\t\treturn i\n\t\t\t}\n\t\t}\n\t}\n\n\tfactory.find = function(id,key='_id') {\n\t\tvar index = factory.findex(id,key)\n\t\treturn content[index]\n\t}\n\n\tfactory.create = function(new_"$entity") {\n\t\tif (valid(new_"$entity")) {\n\t\t\t\$http.post('/"$plural"',new_"$entity").then(function(returned) {\n\t\t\t\tif (returned.status == 200) {\n\t\t\t\t\tcontent.push(returned.data)\n\t\t\t\t} else {\n\t\t\t\t\tconsole.log(returned)\n\t\t\t\t}\n\t\t\t})\n\t\t}\n\t}\n\n\tfactory.update = function(id,patch) {\n\t\tif (valid(patch)) {\n\t\t\t\$http.put('/"$plural"',{'query':{'_id':id},'patch':patch}).then(function(returned) {\n\t\t\t\tif (returned.status == 200) {\n\t\t\t\t\tvar index = factory.findex(id)\n\t\t\t\t\tcontent[index] = returned.data\n\t\t\t\t} else {\n\t\t\t\t\tconsole.log(returned)\n\t\t\t\t}\n\t\t\t})\n\t\t}\n\t}\n\n\tfactory.delete = function(id) {\n\t\tif (findex(id)+1) {\n\t\t\t\$http.delete('/"$plural"/id').then(function(returned) {\n\t\t\t\tif (returned.status == 200) {\n\t\t\t\t\tvar index = factory.findex(id)\n\t\t\t\t\tfor (var i = index; i < content.length; i++) {\n\t\t\t\t\t\tcontent[i] = content[i+1]\n\t\t\t\t\t}\n\t\t\t\t\tcontent.pop()\n\t\t\t\t} else {\n\t\t\t\t\tconsole.log(returned)\n\t\t\t\t}\n\t\t\t})\n\t\t}\n\t}\n\n\treturn factory\n\n}])" >> "$Entity"Factory.js
+				echo "app.factory('"$Entity"Factory',['\$http',function(\$http) {\n\n\tvar factory = {}\n\tvar content = []\n\n\tfunction valid("$entity") {\n\t\treturn true\n\t}\n\n\tfactory.all = function() {\n\t\treturn \$http.get('/"$plural"')\n\t}\n\n\tfactory.get = function(callback) {\n\t\tif (typeof(callback) == 'function') {\n\t\t\treturn callback(content)\n\t\t} else {\n\t\t\tthrow new TypeError('Expected Function, got',callback.__proto__.constructor.name)\n\t\t}\n\t}\n\n\tfactory.findex = function(id,key='_id') {\n\t\tfor (var i = 0; i < content.length; i++) {\n\t\t\tif (content[i][key] == id) {\n\t\t\t\treturn i\n\t\t\t}\n\t\t}\n\t}\n\n\tfactory.find = function(id,key='_id') {\n\t\tvar index = factory.findex(id,key)\n\t\treturn content[index]\n\t}\n\n\tfactory.create = function(new_"$entity") {\n\t\tif (valid(new_"$entity")) {\n\t\t\t\$http.post('/"$plural"',new_"$entity").then(function(returned) {\n\t\t\t\tif (returned.status == 200) {\n\t\t\t\t\tcontent.push(returned.data)\n\t\t\t\t} else {\n\t\t\t\t\tconsole.log(returned)\n\t\t\t\t}\n\t\t\t})\n\t\t}\n\t}\n\n\tfactory.update = function(id,patch) {\n\t\tif (valid(patch)) {\n\t\t\t\$http.put('/"$plural"',{'query':{'_id':id},'patch':patch}).then(function(returned) {\n\t\t\t\tif (returned.status == 200) {\n\t\t\t\t\tvar index = factory.findex(id)\n\t\t\t\t\tcontent[index] = returned.data\n\t\t\t\t} else {\n\t\t\t\t\tconsole.log(returned)\n\t\t\t\t}\n\t\t\t})\n\t\t}\n\t}\n\n\tfactory.delete = function(id) {\n\t\tif (findex(id)+1) {\n\t\t\t\$http.delete('/"$plural"/id').then(function(returned) {\n\t\t\t\tif (returned.status == 200) {\n\t\t\t\t\tvar index = factory.findex(id)\n\t\t\t\t\tfor (var i = index; i < content.length; i++) {\n\t\t\t\t\t\tcontent[i] = content[i+1]\n\t\t\t\t\t}\n\t\t\t\t\tcontent.pop()\n\t\t\t\t} else {\n\t\t\t\t\tconsole.log(returned)\n\t\t\t\t}\n\t\t\t})\n\t\t}\n\t}\n\n\treturn factory\n\n}])" >> "$Entity"Factory.js
 
 			cd ..
 
