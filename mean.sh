@@ -129,7 +129,7 @@ cd $project
 	cd ..
 
 	touch server.js
-	echo "var mongoose = require('mongoose'),\n\texpress  = require('express'),\n\tbp       = require('body-parser'),\n\tpath     = require('path'),\n\troot     = __dirname,\n\tport     = process.env.PORT || 8000,\n\tapp      = express();\napp.use(express.static(path.join(root, 'client')));\napp.use(express.static(path.join(root, 'bower_components')));\napp.use(bp.json())\napp.listen(port, function() {\n\tconsole.log('Running at LOCALHOST: 127.0.0.1:'+port)\n});" >> server.js
+	echo "var\texpress  = require('express'),\n\tbp       = require('body-parser'),\n\tpath     = require('path'),\n\troot     = __dirname,\n\tport     = process.env.PORT || 8000,\n\tapp      = express();\napp.use(express.static(path.join(root, 'client')));\napp.use(express.static(path.join(root, 'bower_components')));\napp.use(bp.json())\nrequire('./server/config/mongoose.js');\nrequire('./server/config/routes.js')(app);\napp.listen(port, function() {\n\tconsole.log('Running at LOCALHOST: 127.0.0.1:'+port)\n});" >> server.js
 
 	touch .gitignore
 	echo "*.pem\nnode_modules\nbower_components\nlink.txt" >> .gitignore
