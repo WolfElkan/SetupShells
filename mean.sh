@@ -57,7 +57,7 @@ cd $project
 			cd controllers
 
 				touch "$plural"_cxr.js
-				\n echo "app.controller('"$plural"_cxr',['\$scope','\$location','\$routeParams','"$Entity"Factory',function(\$scope,\$location,\$routeParams,"$Entity"Factory,) {\n\n\t\$scope.$Entity = "$Entity"Factory\n\n\t\$scope."$entity"_index = "$Entity"Factory.all( )\n\t\$scope."$entity"_show = function(_id) {\n\t\treturn "$Entity"Factory.find(_id)\n\t}\n\n\t\$scope."$entity"_new = {}\n\t\$scope."$entity"_create = function() {\n\t\t"$Entity"Factory.create(\$scope."$entity"_new)\n\t\t\$location.url('/"$plural"')\n\t}\n\n\t\$scope."$entity"_edit = {}\n\t\$scope."$entity"_update = function() {\n\t\t"$Entity"Factory.update(\$routeParams.id,\$scope."$entity"_edit = {})\n\t\t\$location.url('/"$plural"')\n\t}\n\n\t\$scope."$entity"_delete = function() {\n\t\t"$Entity"Factory.delete(\$scope.new_"$entity")\n\t}\n}])" >> "$plural""_cxr.js"
+				echo "app.controller('"$plural"_cxr',['\$scope','\$location','\$routeParams','"$Entity"Factory',function(\$scope,\$location,\$routeParams,"$Entity"Factory,) {\n\n\t\$scope.$Entity = "$Entity"Factory\n\n\t\$scope."$entity"_index = "$Entity"Factory.all( )\n\t\$scope."$entity"_show = function(_id) {\n\t\treturn "$Entity"Factory.find(_id)\n\t}\n\n\t\$scope."$entity"_new = {}\n\t\$scope."$entity"_create = function() {\n\t\t"$Entity"Factory.create(\$scope."$entity"_new)\n\t\t\$location.url('/"$plural"')\n\t}\n\n\t\$scope."$entity"_edit = {}\n\t\$scope."$entity"_update = function() {\n\t\t"$Entity"Factory.update(\$routeParams.id,\$scope."$entity"_edit = {})\n\t\t\$location.url('/"$plural"')\n\t}\n\n\t\$scope."$entity"_delete = function() {\n\t\t"$Entity"Factory.delete(\$scope.new_"$entity")\n\t}\n}])" >> "$plural""_cxr.js"
 
 		cd ../..
 
