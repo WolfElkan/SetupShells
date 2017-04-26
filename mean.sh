@@ -1,8 +1,12 @@
 echo "Please enter your name:"
 read author
+# author="your_name_here"
+# echo $author
 
 echo "Please enter your email:"
 read email
+# email="email@domain.com"
+# echo $email
 
 echo "Please enter a name for the project:"
 read project
